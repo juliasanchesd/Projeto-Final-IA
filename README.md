@@ -47,6 +47,7 @@ Este processo caracteriza uma **busca semântica**, pois a comparação é feita
 └── static/
     └── style.css         # Arquivo de estilos da interface
 
+
 ---
 
 ## Instalação e Execução
