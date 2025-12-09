@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agente de Vagas IA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="chat-wrapper">
+      <div class="chat-header">
+        <div class="chat-avatar">🧠</div>
+        <div class="chat-header-text">
+          <h1>JobMatch IA</h1>
+          <p>Inteligência para encontrar vagas compatíveis</p>
+        </div>
+      </div>
+
+      <div class="chat-body">
+        <div class="chat-placeholder" id="placeholder">
+          <div class="chat-placeholder-icon">💼</div>
+          <div class="chat-placeholder-title">
+            Vamos descobrir vagas ideais para o seu perfil?
+          </div>
+          <p>
+            Descreva suas experiências, habilidades e interesses. Eu vou sugerir
+            vagas compatíveis.
+          </p>
+        </div>
+
+        <div class="chat-messages" id="messages" style="display: none"></div>
+      </div>
+
+      <form
+        class="chat-footer"
+        id="chat-form"
+        autocomplete="off"
+        style="position: relative"
+      >
+        <input
+          type="text"
+          id="user-input"
+          class="chat-input"
+          placeholder="Descreva seu perfil ou vagas que está procurando..."
+        />
+        <button type="submit" class="chat-send-btn">➤</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("user-input");
+      const messagesEl = document.getElementById("messages");
+      const placeholderEl = document.getElementById("placeholder");
+
+      function addMessage(text, type) {
+        placeholderEl.style.display = "none";
+        messagesEl.style.display = "flex";
+
+        const msg = document.createElement("div");
+        msg.classList.add(
+          "message",
+          type === "user" ? "message-user" : "message-bot"
+        );
+
+        if (type === "bot") {
+          msg.innerHTML = text;
+        } else {
+          msg.innerText = text;
+        }
+
+        messagesEl.appendChild(msg);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage(text, "user");
+        input.value = "";
+
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text }),
+          });
+
+          const data = await response.json();
+          addMessage(
+            data.reply ||
+              "Não consegui gerar uma resposta agora. Tente novamente mais tarde.",
+            "bot"
+          );
+        } catch (err) {
+          console.error(err);
+          addMessage(
+            "Ops, ocorreu um erro ao falar com a IA. Tente novamente em instantes.",
+            "bot"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
