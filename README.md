@@ -36,6 +36,8 @@ Este processo caracteriza uma **busca semântica**, pois a comparação é feita
 
 ## Estrutura do Projeto
 
+
+```text
 /projeto
 │
 ├── app.py                # Aplicação Flask e rota da API
@@ -46,7 +48,6 @@ Este processo caracteriza uma **busca semântica**, pois a comparação é feita
 │
 └── static/
     └── style.css         # Arquivo de estilos da interface
-
 
 ---
 
