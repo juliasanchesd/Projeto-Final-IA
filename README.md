@@ -3,6 +3,7 @@
 Este projeto implementa um agente de Inteligência Artificial que utiliza busca semântica baseada em embeddings para recomendar vagas da área de Tecnologia da Informação.
 O sistema converte o texto digitado pelo usuário e as descrições das vagas em vetores numéricos e calcula a similaridade do cosseno entre eles.
 A partir dessa comparação vetorial, o agente identifica e retorna as vagas cujo significado apresenta maior proximidade com o perfil informado.
+
 ---
 
 ## Objetivo
