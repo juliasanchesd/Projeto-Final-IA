@@ -38,32 +38,37 @@ Este processo caracteriza uma **busca semântica**, pois a comparação é feita
 
 /projeto
 │
-├── app.py # Aplicação Flask e rota da API
-├── agent.py # Lógica de recomendação e cálculo de similaridade
+├── app.py                # Aplicação Flask e rota da API
+├── agent.py              # Lógica de recomendação e cálculo de similaridade
 │
 ├── templates/
-│ └── index.html # Interface web estilo chat
+│   └── index.html        # Interface web estilo chat
 │
 └── static/
-└── style.css # Arquivo de estilos da interface
+    └── style.css         # Arquivo de estilos da interface
 
 ---
 
 ## Instalação e Execução
 
 ### 1. Criar ambiente virtual
+
 ```bash
 python -m venv venv
 source venv/Scripts/activate   # Windows (Git Bash)
+```
 
-### 2. Instalar dependências
+### 2. Instalar dependências  
 Instale manualmente as bibliotecas utilizadas no projeto:
 
 ```bash
 pip install flask
 pip install sentence-transformers
 pip install numpy
+```
 
 ### 3. Executar aplicação
-python app.py
 
+```bash
+python app.py
+```
